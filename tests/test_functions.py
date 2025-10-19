@@ -23,14 +23,14 @@ class Test(unittest.TestCase):
     def test_load_file_contains_expected_keys(self):
         heroes = load_file(self.test_file)
         self.assertIn("6", heroes)
-        self.assertIn("9", heroes)
+        self.assertIn("7", heroes)
 
     def test_load_fields_are_correct(self):
         heroes = load_file(self.test_file)
         superman = heroes["6"]
         self.assertEqual(superman["name"], "Superman")
         self.assertEqual(superman["gender"], "Male")
-        self.assertEqual(superman["alignment"], "Bad")
+        self.assertEqual(superman["alignment"], "Good")
 
 if __name__ == "__main__":
     unittest.main()
