@@ -1,10 +1,31 @@
 version: 0.2
 
 phases:
-  pre_build:
+  install:
     commands:
       - echo installing requirements
+      - pip install --upgrade pip
       - pip install -r requirements.txt
+
+  pre_build:
+    commands:
+      - echo Running linting...
+      - flake8 . || true
+
+  build:
+    commands:
+      - echo Running unit tests...
+      - pytest --maxfail=1 --disable-warnings -q --junitxml=test-results.xml
+
+  post_build:
+    commands:
+      - echo Build completed successfully!
+
 artifacts:
   files:
     - '**/*'
+  reports:
+    pytest_reports:
+      files:
+        - test-results.xml
+      file-format: JUNITXML

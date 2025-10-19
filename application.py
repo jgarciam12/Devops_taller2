@@ -10,6 +10,9 @@ def index():
 
 @application.route("/<string:id>")
 def heroe(id):
+    hero = data.get(id)
+    if hero is None:
+        return jsonify({"error": "No hero found"}), 404
     return jsonify(data[id])
 
 if __name__ == "__main__":
